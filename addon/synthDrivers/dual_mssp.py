@@ -7,7 +7,7 @@
 # Project homepage: https://github.com/Mahmood-Taghavi/dual_voice
 
 
-from dual_sapi5 import SynthDriver
+from .dual_sapi5 import SynthDriver
 
 class SynthDriver(SynthDriver):
 	COM_CLASS = "speech.SPVoice"

@@ -7,7 +7,7 @@
 # Project homepage: https://github.com/Mahmood-Taghavi/dual_voice
 
 
-import _dualvoice
+from . import _dualvoice
 import addonHandler
 import locale
 from collections import OrderedDict

@@ -9,3 +9,4 @@ Copyright 2015-2020 Seyed Mahmood Taghavi-Shahri.
 
 This package is distributed under the terms of the GNU General Public License, version 2. Please see the file "COPYING.txt" for further details.
 
+The latest version is 4.0 which is available at (https://github.com/Mahmood-Taghavi/dual_voice/releases/download/4.0/dual_voice-4.0.nvda-addon).

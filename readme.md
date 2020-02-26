@@ -6,7 +6,7 @@ Languages with the non-Latin script are Persian, Arabic, Belarusian, Bulgarian, 
 
 You can find more information on the [homepage of the Dual Voice for NVDA](https://mahmood-taghavi.github.io/dual_voice/).
 
-You can download the [latest version of the Dual Voice for NVDA](https://github.com/Mahmood-Taghavi/dual_voice/releases/download/4.1/dual_voice-4.1.nvda-addon)
+You can download the [latest version of the Dual Voice for NVDA](https://github.com/Mahmood-Taghavi/dual_voice/releases/download/v4.1/dual_voice-4.1.nvda-addon)
 
 Note: You can now use a custom dialog box entitled "Dual voice" in the NVDA menu to select the secondary voice and setting of the Dual voice.
 

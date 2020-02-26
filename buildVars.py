@@ -19,7 +19,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description" : _("""Read non-Latin and Latin texts using two separate voices."""),
 	# version
-	"addon_version" : "4.0",
+	"addon_version" : "4.1",
 	# Author(s)
 	"addon_author" : u"Seyed Mahmood Taghavi-Shahri",
 	# URL for the add-on documentation support

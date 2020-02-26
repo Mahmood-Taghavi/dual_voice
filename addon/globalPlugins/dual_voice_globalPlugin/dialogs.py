@@ -67,6 +67,23 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 		sizer.Add(synthLabel)
 		###
 		if ("dual_sapi5" in speech.getSynth().name or "dual_mssp" in speech.getSynth().name or "dual_eSpeak" in speech.getSynth().name):
+			## find the primary voice and show it in a label          
+			primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
+			primaryVoiceToken = primaryVoiceID.split("\\")
+			voiceToken = primaryVoiceToken[-1]
+			try:
+				voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
+				key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+				voiceAttribName = winreg.QueryValueEx(key, 'Name')
+				key.Close()
+			except:
+				voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
+				key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+				voiceAttribName = winreg.QueryValueEx(key, 'Name')
+				key.Close()
+			primaryVoiceLabel = wx.StaticText(self, label=_('You have selected ') + voiceAttribName[0] + ' as the primary voice.')		
+			sizer.Add(primaryVoiceLabel)			
+			##        
 			VoiceOrderedDict = SynthDriver._get_availableVoices(speech.getSynth()) # it's an OrderedDict
 			list_VoiceInfo = [ VoiceInfo for VoiceInfo in VoiceOrderedDict.values() ] # it's a list of NVDA VoiceInfo objects
 			# extract ID, name, and language field of each VoiceInfo object and save them in corresponding lists
@@ -112,10 +129,6 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 					self.list_VoiceAttribName.append(voiceAttribName[0]) # index 0 is the value of the registry item returned by winreg.QueryValueEx
 				else:
 					self.list_VoiceAttribName.append('unsupported')
-			###	
-			primaryVoiceLabel = wx.StaticText(self, label=_('You have selected ') + list_VoiceName[0] + ' as the primary voice.')		
-			sizer.Add(primaryVoiceLabel)			
-			##
 			sVoicesLabel = wx.StaticText(self, label=_("Secondary &voice:"))		
 			sizer.Add(sVoicesLabel)	
 			self._sVoicesChoice = wx.Choice(self, choices = list_VoiceName)
@@ -165,7 +178,7 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 			self._sVoicesChoice.Bind(wx.EVT_CHOICE, self.onSVoiceChange)
 			sizer.Add(self._sVoicesChoice)
 			##
-			self._secondIsLatinCheckBox = wx.CheckBox(self, label = _("&Use the secondary voice for reading Latin text instead of non-Latin text."))
+			self._secondIsLatinCheckBox = wx.CheckBox(self, label = _("&Use the secondary voice for reading Latin text instead of non-Latin."))
 			if ("dual_sapi5" in speech.getSynth().name):
 				self._secondIsLatinCheckBox.SetValue(config.conf["dual_voice"]["sapi5SecondIsLatin"])
 			elif ("dual_mssp" in speech.getSynth().name):
@@ -211,7 +224,7 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 				self._sVolumeSlider.SetValue(config.conf["dual_voice"]["eSpeakSecondVolume"])				
 			sizer.Add(self._sVolumeSlider)
 			##
-			self._nonLatinPriorityCheckBox = wx.CheckBox(self, label = _("&Prioritize non-Latin text over Latin text in the Dual Voice processing."))
+			self._nonLatinPriorityCheckBox = wx.CheckBox(self, label = _("&Prioritize non-Latin text over Latin text."))
 			if ("dual_sapi5" in speech.getSynth().name):
 				self._nonLatinPriorityCheckBox.SetValue(config.conf["dual_voice"]["sapi5NonLatinPriority"])
 			elif ("dual_mssp" in speech.getSynth().name):
@@ -220,7 +233,7 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 				self._nonLatinPriorityCheckBox.SetValue(config.conf["dual_voice"]["eSpeakNonLatinPriority"])					
 			self._nonLatinPriorityCheckBox.Bind(wx.EVT_CHECKBOX, self.nonLatinPriorityCheck)
 			sizer.Add(self._nonLatinPriorityCheckBox)
-			self._considerContextCheckBox = wx.CheckBox(self, label = _("Read &numbers and punctuations based on their surrounding text."))	
+			self._considerContextCheckBox = wx.CheckBox(self, label = _("Read &numbers and punctuations based on context."))	
 			if ("dual_sapi5" in speech.getSynth().name):
 				self._considerContextCheckBox.SetValue(config.conf["dual_voice"]["sapi5ConsiderContext"])
 			elif ("dual_mssp" in speech.getSynth().name):

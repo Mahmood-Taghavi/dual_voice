@@ -69,7 +69,7 @@ class GlobalPlugin (globalPluginHandler.GlobalPlugin):
 		self.submenu_item = gui.mainFrame.sysTrayIcon.menu.InsertMenu(2, wx.ID_ANY, _("Dual &voice"), self.submenu_dualvoice)
 
 	def onAbout(self, event):
-		gui.messageBox("Version 4.0 by Seyed Mahmood Taghavi-Shahri", _("About the Dual voice add-on for NVDA"), wx.OK)
+		gui.messageBox("Version 4.1 by Seyed Mahmood Taghavi-Shahri", _("About the Dual voice add-on for NVDA"), wx.OK)
 		
 		
 	def onCheckUpdate(self, event):

@@ -21,7 +21,7 @@ addon_info = {
 	# version
 	"addon_version" : "4.1",
 	# Author(s)
-	"addon_author" : u"Seyed Mahmood Taghavi-Shahri",
+	"addon_author" : u"Seyed Mahmood Taghavi-Shahri <mahmood.taghavi@gmail.com>",
 	# URL for the add-on documentation support
 	"addon_url" : "https://mahmood-taghavi.github.io/dual_voice/",
 	# Documentation file name

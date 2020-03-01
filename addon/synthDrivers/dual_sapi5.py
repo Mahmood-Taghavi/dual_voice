@@ -204,7 +204,8 @@ class SynthDriver(SynthDriver):
 		return self._pitch
 
 	def _get_volume(self):
-		return self.tts.volume
+#		return self.tts.volume
+		return _realtime.sapi5FirstVolume
 
 	def _get_voice(self):
 		return self.tts.voice.Id
@@ -227,7 +228,8 @@ class SynthDriver(SynthDriver):
 		self._pitch=value
 
 	def _set_volume(self,value):
-		self.tts.Volume = value
+#		self.tts.Volume = value
+		_realtime.sapi5FirstVolume = value
 
 	def _initTts(self, voice=None):
 		self.tts=comtypes.client.CreateObject(self.COM_CLASS)
@@ -318,7 +320,8 @@ class SynthDriver(SynthDriver):
 		# Pitch must always be specified in the markup.
 		tags["pitch"] = {"absmiddle": self._percentToPitch(pitch)}
 		rate = self.rate
-		volume = self.volume
+#		volume = self.volume
+		volume = _realtime.sapi5FirstVolume
 
 		for item in speechSequence:
 			if isinstance(item, str):
@@ -395,12 +398,12 @@ class SynthDriver(SynthDriver):
 				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
 				index = _realtime.list_VoiceID.index(primaryVoiceID)
 				voiceAttribName = _realtime.list_VoiceAttribName[index]
-				config.conf["dual_voice"]["tempSecondVoice"] = config.conf["dual_voice"]["sapi5SecondVoice"]
+				_realtime.tempStringVar = config.conf["dual_voice"]["sapi5SecondVoice"]
 				config.conf["dual_voice"]["sapi5SecondVoice"] = voiceAttribName 
 				self._speak(speechSequence)
 			except:
 				## solution 2: find the default voice and use it as the primary voice            
-				config.conf["dual_voice"]["sapi5SecondVoice"] = config.conf["dual_voice"]["tempSecondVoice"]                                
+				config.conf["dual_voice"]["sapi5SecondVoice"] = _realtime.tempStringVar
 				log.warning('Dual Voice add-on: try possible solution 2 to find the default voice and use it as the primary voice.')
 				tokens = self._getVoiceTokens()
 				voice=tokens[0]

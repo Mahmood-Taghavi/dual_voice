@@ -24,8 +24,9 @@ def nlp(text):
 	considerContext = config.conf["dual_voice"]["sapi5ConsiderContext"]
 	nonLatinStartTag = ' <voice required="Name=' + SecondVoice + '"> <volume level="' + SecondVolume + '"> <rate absspeed="' + SecondRate + '"> <pitch absmiddle="' + SecondPitch + '"> '
 	nonLatinEndTag = ' </pitch> </rate> </volume> </voice> '
-	LatinStartTag = ''
-	LatinEndTag = ''
+	FirstVolume = str(_realtime.sapi5FirstVolume)
+	LatinStartTag = '<volume level="' + FirstVolume + '">'
+	LatinEndTag = '</volume>'
 	if config.conf["dual_voice"]["sapi5SecondIsLatin"] == False:
 		return _dualvoice.nlp(text,latinPriority,considerContext,nonLatinStartTag,nonLatinEndTag,LatinStartTag,LatinEndTag)
 	else:

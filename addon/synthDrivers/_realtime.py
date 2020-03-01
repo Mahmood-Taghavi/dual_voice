@@ -4,3 +4,5 @@ list_VoiceAttribName = []
 list_VoiceID = []
 list_VoiceName = []
 list_VoiceLang = []
+sapi5FirstVolume = 100
+tempStringVar = ''

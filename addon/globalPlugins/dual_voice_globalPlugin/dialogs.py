@@ -67,23 +67,6 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 		sizer.Add(synthLabel)
 		###
 		if ("dual_sapi5" in speech.getSynth().name or "dual_mssp" in speech.getSynth().name or "dual_eSpeak" in speech.getSynth().name):
-			## find the primary voice and show it in a label          
-			primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
-			primaryVoiceToken = primaryVoiceID.split("\\")
-			voiceToken = primaryVoiceToken[-1]
-			try:
-				voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
-				key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-				voiceAttribName = winreg.QueryValueEx(key, 'Name')
-				key.Close()
-			except:
-				voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
-				key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-				voiceAttribName = winreg.QueryValueEx(key, 'Name')
-				key.Close()
-			primaryVoiceLabel = wx.StaticText(self, label=_('You have selected ') + voiceAttribName[0] + ' as the primary voice.')		
-			sizer.Add(primaryVoiceLabel)			
-			##        
 			VoiceOrderedDict = SynthDriver._get_availableVoices(speech.getSynth()) # it's an OrderedDict
 			list_VoiceInfo = [ VoiceInfo for VoiceInfo in VoiceOrderedDict.values() ] # it's a list of NVDA VoiceInfo objects
 			# extract ID, name, and language field of each VoiceInfo object and save them in corresponding lists
@@ -104,14 +87,18 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 					try:
 						voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
 						key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-						voiceAttribName = winreg.QueryValueEx(key, 'Name')
-						key.Close()
 					except:
 						voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
 						key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					try:
 						voiceAttribName = winreg.QueryValueEx(key, 'Name')
 						key.Close()
-					self.list_VoiceAttribName.append(voiceAttribName[0]) # index 0 is the value of the registry item returned by winreg.QueryValueEx
+						self.list_VoiceAttribName.append(voiceAttribName[0]) # index 0 is the value of the registry item returned by winreg.QueryValueEx
+					except:
+						log.warning('Dual Voice add-on: ' + list_VoiceName[index] + ' has not the required "Name" field in the windows registry. Hence, this voice is removed from the list of the Dual Voice secondary voices.')
+						del self.list_VoiceID[index]
+						del list_VoiceName[index]
+						del list_VoiceLang[index]
 				elif ("dual_mssp" in speech.getSynth().name):
 					listVoiceToken = voiceID.split("\\")
 					voiceToken = listVoiceToken[-1]
@@ -129,6 +116,39 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 					self.list_VoiceAttribName.append(voiceAttribName[0]) # index 0 is the value of the registry item returned by winreg.QueryValueEx
 				else:
 					self.list_VoiceAttribName.append('unsupported')
+			## find the primary voice and show it in a label      
+			try:
+				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
+				primaryVoiceToken = primaryVoiceID.split("\\")
+				voiceToken = primaryVoiceToken[-1]
+				try:
+					voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken
+					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					voiceAttribName = winreg.QueryValueEx(key, '') # read default value
+					key.Close()
+				except:
+					voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken 
+					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					voiceAttribName = winreg.QueryValueEx(key, '') # read default value
+					key.Close()
+			except:
+				config.conf["speech"]["dual_sapi5"]["voice"] = self.list_VoiceID[0]
+				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
+				primaryVoiceToken = primaryVoiceID.split("\\")
+				voiceToken = primaryVoiceToken[-1]
+				try:
+					voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken
+					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					voiceAttribName = winreg.QueryValueEx(key, '') # read default value
+					key.Close()
+				except:
+					voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken 
+					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					voiceAttribName = winreg.QueryValueEx(key, '') # read default value
+					key.Close()			
+			primaryVoiceLabel = wx.StaticText(self, label=_('You have selected ') + voiceAttribName[0] + ' as the primary voice.')		
+			sizer.Add(primaryVoiceLabel)			
+			##        					
 			sVoicesLabel = wx.StaticText(self, label=_("Secondary &voice:"))		
 			sizer.Add(sVoicesLabel)	
 			self._sVoicesChoice = wx.Choice(self, choices = list_VoiceName)

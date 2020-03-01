@@ -24,6 +24,7 @@ import nvwave
 from logHandler import log
 import weakref
 from . import _dual_sapi5
+from synthDrivers import _realtime
 
 
 # SPAudioState enumeration
@@ -253,6 +254,7 @@ class SynthDriver(SynthDriver):
 			# Voice not found.
 			return
 		self._initTts(voice=voice)
+		_realtime.primaryVoiceID = voice.Id
 
 	def _percentToPitch(self, percent):
 		return percent // 2 - 25
@@ -281,7 +283,7 @@ class SynthDriver(SynthDriver):
 			out.append(outAfter)
 		return u" ".join(out)
 
-	def speak(self, speechSequence):
+	def _speak(self, speechSequence):
 		textList = []
 
 		# NVDA SpeechCommands are linear, but XML is hierarchical.
@@ -374,7 +376,40 @@ class SynthDriver(SynthDriver):
 		text = "".join(textList)
 		flags = constants.SVSFIsXML | constants.SVSFlagsAsync
 		self.tts.Speak(text, flags)
+        
+	def speak(self, speechSequence): 
+		try:
+			self._speak(speechSequence)
+		except:
+			log.warning('Dual Voice add-on: It seems the primary or secondary selected SAPI 5 voices are not working properly.')
+			try:
+				## solution 1: find the primary voice and use it also as the secondary voice            
+				log.warning('Dual Voice add-on: try possible solution 1 to find the primary voice and use it as the secondary voice.')
+				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
+				primaryVoiceToken = primaryVoiceID.split("\\")
+				voiceToken = primaryVoiceToken[-1]                
+				try:
+					voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
+					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					voiceAttribName = winreg.QueryValueEx(key, 'Name')
+					key.Close()
+				except:
+					voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
+					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
+					voiceAttribName = winreg.QueryValueEx(key, 'Name')
+					key.Close()
+				config.conf["dual_voice"]["tempSecondVoice"] = config.conf["dual_voice"]["sapi5SecondVoice"]
+				config.conf["dual_voice"]["sapi5SecondVoice"] = voiceAttribName[0] 
+				self._speak(speechSequence)
+			except:
+				## solution 2: find the default voice and use it as the primary voice            
+				config.conf["dual_voice"]["sapi5SecondVoice"] = config.conf["dual_voice"]["tempSecondVoice"]                                
+				log.warning('Dual Voice add-on: try possible solution 2 to find the default voice and use it as the primary voice.')
+				tokens = self._getVoiceTokens()
+				voice=tokens[0]
+				self._initTts(voice=voice)          
 
+            
 	def cancel(self):
 		# SAPI5's default means of stopping speech can sometimes lag at end of speech, especially with Win8 / Win 10 Microsoft Voices.
 		# Therefore  instruct the underlying audio interface to stop first, before interupting and purging any remaining speech.

@@ -7,27 +7,16 @@
 # Project homepage: http://dualvoice.sf.net
 # This file contain functions for natural language processing.
 import config
-import winreg
+from synthDrivers import _realtime
 from . import _dualvoice
 
 def nlp(text):
 	SecondVoice = config.conf["dual_voice"]["sapi5SecondVoice"]
 	if SecondVoice=="":
-		voiceID = config.conf["speech"]["dual_sapi5"]["voice"]
-		listVoiceToken = voiceID.split("\\")
-		voiceToken = listVoiceToken[-1]
-		#self.list_VoiceAttribName.append(voiceToken)				
-		try:
-			voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
-			key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-			voiceAttribName = winreg.QueryValueEx(key, 'Name')
-			key.Close()
-		except:
-			voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
-			key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-			voiceAttribName = winreg.QueryValueEx(key, 'Name')
-			key.Close()
-		SecondVoice = voiceAttribName[0] # index 0 is the value of the registry item returned by winreg.QueryValueEx
+		primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
+		index = _realtime.list_VoiceID.index(primaryVoiceID)
+		voiceAttribName = _realtime.list_VoiceAttribName[index]
+		SecondVoice = voiceAttribName # use the name attribute value of the primary voice as the secondary voice name.
 	SecondVolume = str(config.conf["dual_voice"]["sapi5SecondVolume"])
 	SecondRate = str(round((config.conf["dual_voice"]["sapi5SecondRate"]-50)/5))
 	SecondPitch = str(round((config.conf["dual_voice"]["sapi5SecondPitch"]-50)/5))

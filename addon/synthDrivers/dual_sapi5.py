@@ -181,9 +181,16 @@ class SynthDriver(SynthDriver):
 					language=locale.windows_locale[int(v[i].getattribute('language').split(';')[0],16)]
 				except KeyError:
 					language=None
+				# Extract the name Attribute of each voice which could be used in SAPI5 XML for voice selection.
+				voiceAttribName=v[i].getattribute('name')
 			except COMError:
 				log.warning("Could not get the voice info. Skipping...")
 			voices[ID]=VoiceInfo(ID,name,language)
+			_realtime.list_VoiceAttribName.append(voiceAttribName)
+			_realtime.list_VoiceID.append(ID)
+			_realtime.list_VoiceName.append(name)
+			_realtime.list_VoiceLang.append(language)
+			
 		return voices
 
 	def _getVoiceTokens(self):
@@ -386,20 +393,10 @@ class SynthDriver(SynthDriver):
 				## solution 1: find the primary voice and use it also as the secondary voice            
 				log.warning('Dual Voice add-on: try possible solution 1 to find the primary voice and use it as the secondary voice.')
 				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
-				primaryVoiceToken = primaryVoiceID.split("\\")
-				voiceToken = primaryVoiceToken[-1]                
-				try:
-					voiceRegPath = 'SOFTWARE\\Wow6432Node\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
-					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-					voiceAttribName = winreg.QueryValueEx(key, 'Name')
-					key.Close()
-				except:
-					voiceRegPath = 'SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + voiceToken + '\\Attributes'
-					key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, voiceRegPath)
-					voiceAttribName = winreg.QueryValueEx(key, 'Name')
-					key.Close()
+				index = _realtime.list_VoiceID.index(primaryVoiceID)
+				voiceAttribName = _realtime.list_VoiceAttribName[index]
 				config.conf["dual_voice"]["tempSecondVoice"] = config.conf["dual_voice"]["sapi5SecondVoice"]
-				config.conf["dual_voice"]["sapi5SecondVoice"] = voiceAttribName[0] 
+				config.conf["dual_voice"]["sapi5SecondVoice"] = voiceAttribName 
 				self._speak(speechSequence)
 			except:
 				## solution 2: find the default voice and use it as the primary voice            

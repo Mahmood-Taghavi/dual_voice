@@ -186,11 +186,13 @@ class SynthDriver(SynthDriver):
 			except COMError:
 				log.warning("Could not get the voice info. Skipping...")
 			voices[ID]=VoiceInfo(ID,name,language)
-			_realtime.list_VoiceAttribName.append(voiceAttribName)
-			_realtime.list_VoiceID.append(ID)
-			_realtime.list_VoiceName.append(name)
-			_realtime.list_VoiceLang.append(language)
-			
+			if voiceAttribName in _realtime.list_VoiceAttribName:
+				log.warning(name + ' has not the required Name attribute in the registry. Hence it could not be used as the secondary voice.')
+			else:
+				_realtime.list_VoiceAttribName.append(voiceAttribName)
+				_realtime.list_VoiceID.append(ID)
+				_realtime.list_VoiceName.append(name)
+				_realtime.list_VoiceLang.append(language)
 		return voices
 
 	def _getVoiceTokens(self):

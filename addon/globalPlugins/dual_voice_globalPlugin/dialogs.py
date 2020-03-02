@@ -15,17 +15,32 @@ from synthDrivers import _realtime
 
 class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 	title = _('The "Dual Voice" settings')
+	_tempSecondVoice = ''
+	_tempSecondRate = 50
+	_tempSecondPitch = 50
+	_tempSecondVolume = 100
+	_tempSecondIsLatin = False
+	_tempNonLatinPriority = False
+	_tempConsiderContext = False
 	def __init__(self, parent):
 		super(DualVoiceLanguageSettingsDialog, self).__init__(parent)
+		global _tempSecondVoice
+		global _tempSecondRate
+		global _tempSecondPitch
+		global _tempSecondVolume
+		global _tempSecondIsLatin
+		global _tempNonLatinPriority
+		global _tempConsiderContext
 		#_realtime.typingArea = "Alaki"
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["tempSecondVoice"] = config.conf["dual_voice"]["sapi5SecondVoice"]
-			config.conf["dual_voice"]["tempSecondRate"] = config.conf["dual_voice"]["sapi5SecondRate"]
-			config.conf["dual_voice"]["tempSecondPitch"] = config.conf["dual_voice"]["sapi5SecondPitch"]
-			config.conf["dual_voice"]["tempSecondVolume"] = config.conf["dual_voice"]["sapi5SecondVolume"]
-			config.conf["dual_voice"]["tempSecondIsLatin"] = config.conf["dual_voice"]["sapi5SecondIsLatin"]
-			config.conf["dual_voice"]["tempNonLatinPriority"] = config.conf["dual_voice"]["sapi5NonLatinPriority"]
-			config.conf["dual_voice"]["tempConsiderContext"] = config.conf["dual_voice"]["sapi5ConsiderContext"]		
+			#config.conf["dual_voice"]["tempSecondVoice"] = config.conf["dual_voice"]["sapi5SecondVoice"]
+			_tempSecondVoice = config.conf["dual_voice"]["sapi5SecondVoice"]
+			_tempSecondRate = config.conf["dual_voice"]["sapi5SecondRate"]
+			_tempSecondPitch = config.conf["dual_voice"]["sapi5SecondPitch"]
+			_tempSecondVolume = config.conf["dual_voice"]["sapi5SecondVolume"]
+			_tempSecondIsLatin = config.conf["dual_voice"]["sapi5SecondIsLatin"]
+			_tempNonLatinPriority = config.conf["dual_voice"]["sapi5NonLatinPriority"]
+			_tempConsiderContext = config.conf["dual_voice"]["sapi5ConsiderContext"]		
 
 	def makeSettings(self, sizer):
 		synthInfo = _('Your current speech synthesizer is the %. Please select the Dual Voice as the speech synthesizer in the NVDA speech settings.')
@@ -144,13 +159,13 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 	def onCancel(self, event):
 		# Restore Configurations
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondVoice"] = config.conf["dual_voice"]["tempSecondVoice"]
-			config.conf["dual_voice"]["sapi5SecondRate"] = config.conf["dual_voice"]["tempSecondRate"]
-			config.conf["dual_voice"]["sapi5SecondPitch"] = config.conf["dual_voice"]["tempSecondPitch"]
-			config.conf["dual_voice"]["sapi5SecondVolume"] = config.conf["dual_voice"]["tempSecondVolume"]
-			config.conf["dual_voice"]["sapi5SecondIsLatin"] = config.conf["dual_voice"]["tempSecondIsLatin"]
-			config.conf["dual_voice"]["sapi5NonLatinPriority"] = config.conf["dual_voice"]["tempNonLatinPriority"]
-			config.conf["dual_voice"]["sapi5ConsiderContext"] = config.conf["dual_voice"]["tempConsiderContext"]
+			config.conf["dual_voice"]["sapi5SecondVoice"] = _tempSecondVoice
+			config.conf["dual_voice"]["sapi5SecondRate"] = _tempSecondRate
+			config.conf["dual_voice"]["sapi5SecondPitch"] = _tempSecondPitch
+			config.conf["dual_voice"]["sapi5SecondVolume"] = _tempSecondVolume
+			config.conf["dual_voice"]["sapi5SecondIsLatin"] = _tempSecondIsLatin
+			config.conf["dual_voice"]["sapi5NonLatinPriority"] = _tempNonLatinPriority
+			config.conf["dual_voice"]["sapi5ConsiderContext"] = _tempConsiderContext
 		return super(DualVoiceLanguageSettingsDialog, self).onCancel(event)
 		
 

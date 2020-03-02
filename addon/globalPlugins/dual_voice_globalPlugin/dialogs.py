@@ -1,10 +1,14 @@
-# https://github.com/Mahmood-Taghavi
+# -*- coding: UTF-8 -*-
+#A part of Dual Voice for NVDA
+#Copyright (C) 2015-2020 Seyed Mahmood Taghavi Shahri
+#https://mahmood-taghavi.github.io/dual_voice/
+#This file is covered by the GNU General Public License version 3.
+#See the file COPYING for more details.
 
-#from collections import defaultdict
 import wx
 import gui
-#import addonHandler
-#addonHandler.initTranslation()
+import addonHandler
+addonHandler.initTranslation()
 import config
 
 #import languageHandler
@@ -15,32 +19,9 @@ from synthDrivers import _realtime
 
 class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 	title = _('The "Dual Voice" settings')
-	_tempSecondVoice = ''
-	_tempSecondRate = 50
-	_tempSecondPitch = 50
-	_tempSecondVolume = 100
-	_tempSecondIsLatin = False
-	_tempNonLatinPriority = False
-	_tempConsiderContext = False
 	def __init__(self, parent):
 		super(DualVoiceLanguageSettingsDialog, self).__init__(parent)
-		global _tempSecondVoice
-		global _tempSecondRate
-		global _tempSecondPitch
-		global _tempSecondVolume
-		global _tempSecondIsLatin
-		global _tempNonLatinPriority
-		global _tempConsiderContext
 		#_realtime.typingArea = "Alaki"
-		if ("dual_sapi5" in speech.getSynth().name):
-			#config.conf["dual_voice"]["tempSecondVoice"] = config.conf["dual_voice"]["sapi5SecondVoice"]
-			_tempSecondVoice = config.conf["dual_voice"]["sapi5SecondVoice"]
-			_tempSecondRate = config.conf["dual_voice"]["sapi5SecondRate"]
-			_tempSecondPitch = config.conf["dual_voice"]["sapi5SecondPitch"]
-			_tempSecondVolume = config.conf["dual_voice"]["sapi5SecondVolume"]
-			_tempSecondIsLatin = config.conf["dual_voice"]["sapi5SecondIsLatin"]
-			_tempNonLatinPriority = config.conf["dual_voice"]["sapi5NonLatinPriority"]
-			_tempConsiderContext = config.conf["dual_voice"]["sapi5ConsiderContext"]		
 
 	def makeSettings(self, sizer):
 		synthInfo = _('Your current speech synthesizer is the %. Please select the Dual Voice as the speech synthesizer in the NVDA speech settings.')
@@ -51,14 +32,10 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 		else:
 			## find the primary voice and show it in a label      
 			try:
-				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
-				index = _realtime.list_VoiceID.index(primaryVoiceID)
+				index = _realtime.list_VoiceID.index(_realtime.primaryVoiceID)
 				voiceName = _realtime.list_VoiceName[index]
 			except:
-				config.conf["speech"]["dual_sapi5"]["voice"] = _realtime.list_VoiceID[0]
-				primaryVoiceID = config.conf["speech"]["dual_sapi5"]["voice"]
-				index = _realtime.list_VoiceID.index(primaryVoiceID)
-				voiceName = _realtime.list_VoiceName[index]
+				voiceName = 'a voice without the required name attribute'
 			voiceInfo = _('You have selected % as the primary voice.')
 			voiceInfo = voiceInfo.replace('%', voiceName)
 			infoLabel = wx.StaticText(self, label = voiceInfo)
@@ -70,15 +47,15 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 			sizer.Add(sVoicesLabel)	
 			self._sVoicesChoice = wx.Choice(self, choices = _realtime.list_VoiceName)
 			if ("dual_sapi5" in speech.getSynth().name):
-				check = config.conf["dual_voice"]["sapi5SecondVoice"] in _realtime.list_VoiceAttribName
+				check = _realtime.sapi5SecondVoice in _realtime.list_VoiceAttribName
 				if check:
-					index = _realtime.list_VoiceAttribName.index(config.conf["dual_voice"]["sapi5SecondVoice"])
+					index = _realtime.list_VoiceAttribName.index(_realtime.sapi5SecondVoice)
 					self._sVoicesChoice.SetSelection(index)
 				else:
 					#self._sVoicesChoice.SetSelection(0)
-					check = config.conf["speech"]["dual_sapi5"]["voice"] in _realtime.list_VoiceID
+					check = _realtime.primaryVoiceID in _realtime.list_VoiceID
 					if check:
-						index = _realtime.list_VoiceID.index(config.conf["speech"]["dual_sapi5"]["voice"])
+						index = _realtime.list_VoiceID.index(_realtime.primaryVoiceID)
 						self._sVoicesChoice.SetSelection(index)
 					else:
 						self._sVoicesChoice.SetSelection(0)
@@ -87,7 +64,7 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 			##
 			self._secondIsLatinCheckBox = wx.CheckBox(self, label = _("&Use the secondary voice for reading Latin text instead of non-Latin."))
 			if ("dual_sapi5" in speech.getSynth().name):
-				self._secondIsLatinCheckBox.SetValue(config.conf["dual_voice"]["sapi5SecondIsLatin"])
+				self._secondIsLatinCheckBox.SetValue(_realtime.sapi5SecondIsLatin)
 			self._secondIsLatinCheckBox.Bind(wx.EVT_CHECKBOX, self.onSIsLatinCheck)
 			sizer.Add(self._secondIsLatinCheckBox)					
 			##
@@ -96,7 +73,7 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 			self._sRateSlider = wx.Slider(self, value = 50, minValue = 0, maxValue = 100, style = wx.SL_HORIZONTAL)	
 			self._sRateSlider.Bind(wx.EVT_SLIDER, self.OnSRateSliderScroll)
 			if ("dual_sapi5" in speech.getSynth().name):
-				self._sRateSlider.SetValue(config.conf["dual_voice"]["sapi5SecondRate"])
+				self._sRateSlider.SetValue(_realtime.sapi5SecondRate)
 			sizer.Add(self._sRateSlider)
 			##
 			sPitchLabel = wx.StaticText(self, label=_("&Pitch:"))
@@ -104,7 +81,7 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 			self._sPitchSlider = wx.Slider(self, value = 50, minValue = 0, maxValue = 100, style = wx.SL_HORIZONTAL)
 			self._sPitchSlider.Bind(wx.EVT_SLIDER, self.OnSPitchSliderScroll)
 			if ("dual_sapi5" in speech.getSynth().name):
-				self._sPitchSlider.SetValue(config.conf["dual_voice"]["sapi5SecondPitch"])
+				self._sPitchSlider.SetValue(_realtime.sapi5SecondPitch)
 			sizer.Add(self._sPitchSlider)
 			##
 			sVolumeLabel = wx.StaticText(self, label=_("V&olume:"))
@@ -112,17 +89,17 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 			self._sVolumeSlider = wx.Slider(self, value = 100, minValue = 0, maxValue = 100, style = wx.SL_HORIZONTAL)				
 			self._sVolumeSlider.Bind(wx.EVT_SLIDER, self.OnSVolumeSliderScroll)
 			if ("dual_sapi5" in speech.getSynth().name):
-				self._sVolumeSlider.SetValue(config.conf["dual_voice"]["sapi5SecondVolume"])			
+				self._sVolumeSlider.SetValue(_realtime.sapi5SecondVolume)			
 			sizer.Add(self._sVolumeSlider)
 			##
 			self._nonLatinPriorityCheckBox = wx.CheckBox(self, label = _("&Prioritize non-Latin text over Latin text."))
 			if ("dual_sapi5" in speech.getSynth().name):
-				self._nonLatinPriorityCheckBox.SetValue(config.conf["dual_voice"]["sapi5NonLatinPriority"])
+				self._nonLatinPriorityCheckBox.SetValue(_realtime.sapi5NonLatinPriority)
 			self._nonLatinPriorityCheckBox.Bind(wx.EVT_CHECKBOX, self.nonLatinPriorityCheck)
 			sizer.Add(self._nonLatinPriorityCheckBox)
-			self._considerContextCheckBox = wx.CheckBox(self, label = _("Read &numbers and punctuations based on context."))	
+			self._considerContextCheckBox = wx.CheckBox(self, label = _("Read &numbers and punctuations based on their context."))	
 			if ("dual_sapi5" in speech.getSynth().name):
-				self._considerContextCheckBox.SetValue(config.conf["dual_voice"]["sapi5ConsiderContext"])							
+				self._considerContextCheckBox.SetValue(_realtime.sapi5ConsiderContext)							
 			self._considerContextCheckBox.Bind(wx.EVT_CHECKBOX, self.considerContextCheck)
 			sizer.Add(self._considerContextCheckBox)			
 			##
@@ -154,45 +131,54 @@ class DualVoiceLanguageSettingsDialog(gui.SettingsDialog):
 		# Update Configurations
 		if ("dual_sapi5" in speech.getSynth().name):				
 			_realtime.typingArea = self._typingAreaTextCtrl.GetValue()
+			config.conf["dual_voice"]["sapi5SecondVoice"] = _realtime.sapi5SecondVoice
+			config.conf["dual_voice"]["sapi5SecondRate"] = _realtime.sapi5SecondRate
+			config.conf["dual_voice"]["sapi5SecondPitch"] = _realtime.sapi5SecondPitch
+			config.conf["dual_voice"]["sapi5SecondVolume"] = _realtime.sapi5SecondVolume
+			config.conf["dual_voice"]["sapi5SecondIsLatin"] = _realtime.sapi5SecondIsLatin
+			config.conf["dual_voice"]["sapi5NonLatinPriority"] = _realtime.sapi5NonLatinPriority
+			config.conf["dual_voice"]["sapi5ConsiderContext"] = _realtime.sapi5ConsiderContext
+			
 		return super(DualVoiceLanguageSettingsDialog, self).onOk(event)
 		
 	def onCancel(self, event):
 		# Restore Configurations
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondVoice"] = _tempSecondVoice
-			config.conf["dual_voice"]["sapi5SecondRate"] = _tempSecondRate
-			config.conf["dual_voice"]["sapi5SecondPitch"] = _tempSecondPitch
-			config.conf["dual_voice"]["sapi5SecondVolume"] = _tempSecondVolume
-			config.conf["dual_voice"]["sapi5SecondIsLatin"] = _tempSecondIsLatin
-			config.conf["dual_voice"]["sapi5NonLatinPriority"] = _tempNonLatinPriority
-			config.conf["dual_voice"]["sapi5ConsiderContext"] = _tempConsiderContext
+			_realtime.sapi5SecondVoice = config.conf["dual_voice"]["sapi5SecondVoice"]
+			_realtime.sapi5SecondRate = config.conf["dual_voice"]["sapi5SecondRate"]
+			_realtime.sapi5SecondPitch = config.conf["dual_voice"]["sapi5SecondPitch"]
+			_realtime.sapi5SecondVolume = config.conf["dual_voice"]["sapi5SecondVolume"]
+			_realtime.sapi5SecondIsLatin = config.conf["dual_voice"]["sapi5SecondIsLatin"]
+			_realtime.sapi5NonLatinPriority = config.conf["dual_voice"]["sapi5NonLatinPriority"]
+			_realtime.sapi5ConsiderContext = config.conf["dual_voice"]["sapi5ConsiderContext"]
 		return super(DualVoiceLanguageSettingsDialog, self).onCancel(event)
 		
 
 	def onSVoiceChange(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondVoice"] = _realtime.list_VoiceAttribName[self._sVoicesChoice.GetSelection()]
+			_realtime.sapi5SecondVoice = _realtime.list_VoiceAttribName[self._sVoicesChoice.GetSelection()]
+			_realtime.problemisticSapi5SecondVoice = ''
 
 	def OnSRateSliderScroll(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondRate"] = self._sRateSlider.GetValue()
+			_realtime.sapi5SecondRate = self._sRateSlider.GetValue()
 		
 	def OnSPitchSliderScroll(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondPitch"] = self._sPitchSlider.GetValue()
+			_realtime.sapi5SecondPitch = self._sPitchSlider.GetValue()
 	
 	def OnSVolumeSliderScroll(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondVolume"] = self._sVolumeSlider.GetValue()
+			_realtime.sapi5SecondVolume = self._sVolumeSlider.GetValue()
 	
 	def onSIsLatinCheck(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5SecondIsLatin"] = self._secondIsLatinCheckBox.GetValue()
+			_realtime.sapi5SecondIsLatin = self._secondIsLatinCheckBox.GetValue()
 
 	def nonLatinPriorityCheck(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5NonLatinPriority"] = self._nonLatinPriorityCheckBox.GetValue()	
+			_realtime.sapi5NonLatinPriority = self._nonLatinPriorityCheckBox.GetValue()	
 	
 	def considerContextCheck(self, event):
 		if ("dual_sapi5" in speech.getSynth().name):
-			config.conf["dual_voice"]["sapi5ConsiderContext"] = self._considerContextCheckBox.GetValue()
+			_realtime.sapi5ConsiderContext = self._considerContextCheckBox.GetValue()

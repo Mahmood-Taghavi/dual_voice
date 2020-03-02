@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-# Dual voice Add-on for NVDA.
-# Copyright (C) 2015 Seyed Mahmood Taghavi-Shahri.
-# This file is covered by the GNU General Public License.
-# This code initially developed for Persian (Farsi) language.
-# Release: 2015-01-31	Version: 3.0
-# Project homepage: http://dualvoice.sf.net
-# This file contain functions for natural language processing.
+# -*- coding: UTF-8 -*-
+#A part of Dual Voice for NVDA
+#Copyright (C) 2015-2020 Seyed Mahmood Taghavi Shahri
+#https://mahmood-taghavi.github.io/dual_voice/
+#This file is covered by the GNU General Public License version 3.
+#See the file COPYING for more details.
 
 def charactertype(character):
     character.encode('utf-8')

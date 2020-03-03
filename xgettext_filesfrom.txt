@@ -1,0 +1,3 @@
+D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py
+D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py
+D:\~Work\github\dual_voice\buildVars.py

@@ -1,0 +1,100 @@
+# Persian translations for PACKAGE package.
+# Copyright (C) 2020 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Dual Voice for NVDA\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-03 09:14+0330\n"
+"PO-Revision-Date: 2020-03-03 09:14+0330\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Persian\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:20
+msgid "You can type here to check the voices"
+msgstr "شما می‌توانید در اینجا برای بررسی صداها تایپ کنید."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:24
+msgid "&Settings of the Dual voice..."
+msgstr "&تنظیمات صدای دوگانه"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:26
+msgid "&Check the Dual Voice website!"
+msgstr "&بازدید از وبسایت صدای دوگانه"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:28
+msgid "&About the Dual voice for NVDA"
+msgstr "&درباره صدای دوگانه برای NVDA"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
+msgid "Dual &voice"
+msgstr "&صدای دوگانه"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:33
+msgid "About the Dual voice add-on for NVDA"
+msgstr "درباره افزونه صدای دوگانه برای NVDA"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:21
+msgid "The Dual Voice settings"
+msgstr "تنظیمات صدای دوگانه"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:26
+#, python-format
+msgid ""
+"Your current speech synthesizer is the %s. Please select the Dual Voice as "
+"the speech synthesizer in the NVDA speech settings."
+msgstr ""
+"موتور سخنگوی شما در حال حاضر %s است. لطفا در تنظیمات گفتار NVDA "
+"صدای دوگانه را به عنوان موتور سخنگو انتخاب کنید."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:38
+#, python-format
+msgid "You have selected %s as the primary voice."
+msgstr "شما %s را به عنوان صدای اصلی انتخاب کرده‌اید."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:45
+msgid "Secondary &voice:"
+msgstr "&صدای ثانویه"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:64
+msgid "&Use the secondary voice for reading Latin text instead of non-Latin."
+msgstr "&استفاده از صدای ثانویه برای خواندن متن‌های لاتین بجای غیر لاتین"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:70
+msgid "&Rate:"
+msgstr "&سرعت"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:78
+msgid "&Pitch:"
+msgstr "زیر &و بمی"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:86
+msgid "V&olume:"
+msgstr "&حجم صدا"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:94
+msgid "&Prioritize non-Latin text over Latin text."
+msgstr "&دادن اولویت به متن‌های غیر لاتین نسبت به لاتین"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:99
+msgid "Read &numbers and punctuations based on surrounding text."
+msgstr "&خواندن اعداد و علایم بر اساس متن پیرامون"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:105
+msgid "&Typing area:"
+msgstr "ناحیه &تایپ"
+
+#: D:\~Work\github\dual_voice\buildVars.py:17
+msgid "Dual Voice for NVDA"
+msgstr "صدای دوگانه برای NVDA"
+
+#: D:\~Work\github\dual_voice\buildVars.py:20
+msgid "Read non-Latin and Latin texts using two separate voices."
+msgstr "خواندن متن‌های غیرلاتین و لاتین توسط دو صدای جداگانه"

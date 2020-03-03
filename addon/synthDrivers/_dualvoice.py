@@ -87,6 +87,6 @@ def nlp(text,latinPriority,considerContext,nonLatinStartTag,nonLatinEndTag,Latin
     return output
 
 def alaki(text):
-	outtext = text.replace("1", "Yek")# Mahmood
+	outtext = text.replace("1", "Yek")# just a dummy function as a test.
 	return outtext
 

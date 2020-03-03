@@ -20,8 +20,8 @@ def nlp(text):
 	SecondPitch = str(round((_realtime.sapi5SecondPitch-50)/5))
 	latinPriority = (_realtime.sapi5NonLatinPriority==False)
 	considerContext = _realtime.sapi5ConsiderContext
-	nonLatinStartTag = ' <voice required="Name=' + SecondVoice + '"> <volume level="' + SecondVolume + '"> <rate absspeed="' + SecondRate + '"> <pitch absmiddle="' + SecondPitch + '"> '
-	nonLatinEndTag = ' </pitch> </rate> </volume> </voice> '
+	nonLatinStartTag = '<voice required="Name=' + SecondVoice + '"><volume level="' + SecondVolume + '"><rate absspeed="' + SecondRate + '"><pitch absmiddle="' + SecondPitch + '">'
+	nonLatinEndTag = '</pitch></rate></volume></voice>'
 	FirstVolume = str(_realtime.sapi5FirstVolume)
 	LatinStartTag = '<volume level="' + FirstVolume + '">'
 	LatinEndTag = '</volume>'

@@ -5,7 +5,7 @@
 #This file is covered by the GNU General Public License version 3.
 #See the file COPYING for more details.
 
-typingArea = "You can type here to check the voices"
+typingArea = ''
 list_VoiceAttribName = []
 list_VoiceID = []
 list_VoiceName = []

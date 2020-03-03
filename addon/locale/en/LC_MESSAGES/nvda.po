@@ -1,0 +1,100 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2020 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Dual Voice for NVDA\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-03 09:14+0330\n"
+"PO-Revision-Date: 2020-03-03 09:14+0330\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:20
+msgid "You can type here to check the voices"
+msgstr "You can type here to check the voices"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:24
+msgid "&Settings of the Dual voice..."
+msgstr "&Settings of the Dual voice..."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:26
+msgid "&Check the Dual Voice website!"
+msgstr "&Check the Dual Voice website!"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:28
+msgid "&About the Dual voice for NVDA"
+msgstr "&About the Dual voice for NVDA"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
+msgid "Dual &voice"
+msgstr "Dual &voice"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:33
+msgid "About the Dual voice add-on for NVDA"
+msgstr "About the Dual voice add-on for NVDA"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:21
+msgid "The Dual Voice settings"
+msgstr "The Dual Voice settings"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:26
+#, python-format
+msgid ""
+"Your current speech synthesizer is the %s. Please select the Dual Voice as "
+"the speech synthesizer in the NVDA speech settings."
+msgstr ""
+"Your current speech synthesizer is the %s. Please select the Dual Voice as "
+"the speech synthesizer in the NVDA speech settings."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:38
+#, python-format
+msgid "You have selected %s as the primary voice."
+msgstr "You have selected %s as the primary voice."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:45
+msgid "Secondary &voice:"
+msgstr "Secondary &voice:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:64
+msgid "&Use the secondary voice for reading Latin text instead of non-Latin."
+msgstr "&Use the secondary voice for reading Latin text instead of non-Latin."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:70
+msgid "&Rate:"
+msgstr "&Rate:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:78
+msgid "&Pitch:"
+msgstr "&Pitch:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:86
+msgid "V&olume:"
+msgstr "V&olume:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:94
+msgid "&Prioritize non-Latin text over Latin text."
+msgstr "&Prioritize non-Latin text over Latin text."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:99
+msgid "Read &numbers and punctuations based on surrounding text."
+msgstr "Read &numbers and punctuations based on surrounding text."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:105
+msgid "&Typing area:"
+msgstr "&Typing area:"
+
+#: D:\~Work\github\dual_voice\buildVars.py:17
+msgid "Dual Voice for NVDA"
+msgstr "Dual Voice for NVDA"
+
+#: D:\~Work\github\dual_voice\buildVars.py:20
+msgid "Read non-Latin and Latin texts using two separate voices."
+msgstr "Read non-Latin and Latin texts using two separate voices."

@@ -4,7 +4,7 @@ Dual voice is an addon that made possible use of two different voices (currently
 Some of the languages with the Latin writing script are English, Czech, Croatian, Dutch, Finnish, French, German, Italian, Polish, Portuguese, Slovenian, Spanish, and Turkish.
 On the other hand, some languages with the non-Latin script are Arabic, Belarusian, Bulgarian, Chinese, Greek, Hebrew, Japanese, Korean, Persian, Russian, and Ukrainian.
 
-You can download the [latest version of the Dual Voice for NVDA](https://github.com/Mahmood-Taghavi/dual_voice/releases/download/v4.7/dual_voice-4.7.nvda-addon)
+You can download the [latest version of the Dual Voice for NVDA](https://github.com/Mahmood-Taghavi/dual_voice/releases/download/v4.7/dual_voice-4.7.nvda-addon) which is version 4.7.
 
 Note 1: You can now use a custom dialog box entitled "Dual voice" in the NVDA menu to select the secondary voice and setting of the Dual voice.
 

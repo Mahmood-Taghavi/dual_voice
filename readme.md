@@ -14,4 +14,4 @@ Note 3: The latest version of NVDA which supports Windows XP and Windows Vista i
 
 This package is distributed under the terms of the GNU General Public License, version 2. Please see the file "COPYING.txt" for further details.
 
-Copyright (C) 2015-2020 Seyed Mahmood Taghavi-Shahri.
+Copyright © 2015-2020 Seyed Mahmood Taghavi-Shahri.

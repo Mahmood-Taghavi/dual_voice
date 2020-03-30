@@ -1,14 +1,14 @@
-# Persian translations for PACKAGE package.
-# Copyright (C) 2020 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Persian translations for the Dual Voice for NVDA package.
+# Copyright (C) 2020 THE Dual Voice for NVDA'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Dual Voice for NVDA package.
 # <EMAIL@ADDRESS>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Dual Voice for NVDA\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-03 09:14+0330\n"
-"PO-Revision-Date: 2020-03-03 09:14+0330\n"
+"POT-Creation-Date: 2020-03-30 20:03+0430\n"
+"PO-Revision-Date: 2020-03-30 20:03+0430\n"
 "Last-Translator: <EMAIL@ADDRESS>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -19,25 +19,29 @@ msgstr ""
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:20
 msgid "You can type here to check the voices"
-msgstr "شما می‌توانید در اینجا برای بررسی صداها تایپ کنید."
+msgstr "شما می‌توانید برای بررسی صداها در اینجا تایپ کنید"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:24
 msgid "&Settings of the Dual voice..."
-msgstr "&تنظیمات صدای دوگانه"
+msgstr "&تنظیمات صدای دوگانه..."
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:26
-msgid "&Check the Dual Voice website!"
-msgstr "&بازدید از وبسایت صدای دوگانه"
+msgid "Visit the SAPI &Unifier website!"
+msgstr "بازدید از وبسایت SAPI &Unifier!"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:28
+msgid "Visit the &Dual Voice website!"
+msgstr "بازدید از &وبسایت صدای دوگانه!"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
 msgid "&About the Dual voice for NVDA"
 msgstr "&درباره صدای دوگانه برای NVDA"
 
-#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:32
 msgid "Dual &voice"
 msgstr "&صدای دوگانه"
 
-#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:33
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:35
 msgid "About the Dual voice add-on for NVDA"
 msgstr "درباره افزونه صدای دوگانه برای NVDA"
 
@@ -61,35 +65,35 @@ msgstr "شما %s را به عنوان صدای اصلی انتخاب کرده�
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:45
 msgid "Secondary &voice:"
-msgstr "&صدای ثانویه"
+msgstr "&صدای ثانویه:"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:64
 msgid "&Use the secondary voice for reading Latin text instead of non-Latin."
-msgstr "&استفاده از صدای ثانویه برای خواندن متن‌های لاتین بجای غیر لاتین"
+msgstr "&استفاده از صدای ثانویه برای خواندن متن‌های لاتین بجای غیر لاتین."
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:70
 msgid "&Rate:"
-msgstr "&سرعت"
+msgstr "&سرعت:"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:78
 msgid "&Pitch:"
-msgstr "زیر &و بمی"
+msgstr "زیر &و بمی:"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:86
 msgid "V&olume:"
-msgstr "&حجم صدا"
+msgstr "&حجم صدا:"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:94
 msgid "&Prioritize non-Latin text over Latin text."
-msgstr "&دادن اولویت به متن‌های غیر لاتین نسبت به لاتین"
+msgstr "&دادن اولویت به متن‌های غیر لاتین نسبت به لاتین."
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:99
 msgid "Read &numbers and punctuations based on surrounding text."
-msgstr "&خواندن اعداد و علایم بر اساس متن پیرامون"
+msgstr "&خواندن اعداد و علایم بر اساس متن پیرامون."
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:105
 msgid "&Typing area:"
-msgstr "ناحیه &تایپ"
+msgstr "ناحیه &تایپ:"
 
 #: D:\~Work\github\dual_voice\buildVars.py:17
 msgid "Dual Voice for NVDA"

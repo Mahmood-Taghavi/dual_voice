@@ -19,11 +19,11 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description" : _("""Read non-Latin and Latin texts using two separate voices."""),
 	# version
-	"addon_version" : "4.7",
+	"addon_version" : "4.8",
 	# Author(s)
 	"addon_author" : u"Seyed Mahmood Taghavi-Shahri <mahmood.taghavi@gmail.com>",
 	# URL for the add-on documentation support
-	"addon_url" : "https://mahmood-taghavi.github.io/dual_voice/",
+	"addon_url" : "https://mahmood-taghavi.github.io/dual_voice",
 	# Documentation file name
 	"addon_docFileName" : "readme.html",
 	# Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)

@@ -1,19 +1,19 @@
-# English translations for PACKAGE package.
-# Copyright (C) 2020 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# English translations for the Dual Voice for NVDA package.
+# Copyright (C) 2020 THE Dual Voice for NVDA'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Dual Voice for NVDA package.
 # <EMAIL@ADDRESS>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Dual Voice for NVDA\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-03 09:14+0330\n"
-"PO-Revision-Date: 2020-03-03 09:14+0330\n"
+"POT-Creation-Date: 2020-03-30 20:03+0430\n"
+"PO-Revision-Date: 2020-03-30 20:08+0430\n"
 "Last-Translator: <EMAIL@ADDRESS>\n"
 "Language-Team: English\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CP1252\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -26,18 +26,22 @@ msgid "&Settings of the Dual voice..."
 msgstr "&Settings of the Dual voice..."
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:26
-msgid "&Check the Dual Voice website!"
-msgstr "&Check the Dual Voice website!"
+msgid "Visit the SAPI &Unifier website!"
+msgstr "Visit the SAPI &Unifier website!"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:28
+msgid "Visit the &Dual Voice website!"
+msgstr "Visit the &Dual Voice website!"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
 msgid "&About the Dual voice for NVDA"
 msgstr "&About the Dual voice for NVDA"
 
-#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:32
 msgid "Dual &voice"
 msgstr "Dual &voice"
 
-#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:33
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:35
 msgid "About the Dual voice add-on for NVDA"
 msgstr "About the Dual voice add-on for NVDA"
 

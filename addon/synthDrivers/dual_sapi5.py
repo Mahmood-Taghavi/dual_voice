@@ -143,7 +143,7 @@ class SynthDriver(SynthDriver):
 	COM_CLASS = "SAPI.SPVoice"
 
 	name="dual_sapi5"
-	description="Dual voice using Speech API version 5"
+	description="Dual Voice using Speech API version 5"
 
 	@classmethod
 	def check(cls):

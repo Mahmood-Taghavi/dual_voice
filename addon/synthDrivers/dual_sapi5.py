@@ -411,6 +411,10 @@ class SynthDriver(SynthDriver):
 		text = "".join(textList)
 		flags = constants.SVSFIsXML | constants.SVSFlagsAsync
 		self.tts.Speak(text, flags)
+		file = open("dual_sapi5.txt","ab")
+		text = text + '\n'
+		file.write(text.encode('utf8'))        
+		file.close()         
         
 	def speak(self, speechSequence): 
 		try:

@@ -1,6 +1,5 @@
-# Translation of the Dual Voice for NVDA add-on.
-# Copyright (C) 2020 Seyed Mahmood Taghavi-Shahri.
-# https://mahmood-taghavi.github.io/dual_voice/
+# Persian translations for the Dual Voice for NVDA package.
+# Copyright (C) 2020 THE Dual Voice for NVDA'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Dual Voice for NVDA package.
 # <EMAIL@ADDRESS>, 2020.
 #
@@ -23,7 +22,7 @@ msgid "You can type here to check the voices"
 msgstr "شما می‌توانید برای بررسی صداها در اینجا تایپ کنید"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:24
-msgid "&Settings of the Dual Voice..."
+msgid "&Settings of the Dual voice..."
 msgstr "&تنظیمات صدای دوگانه..."
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:26
@@ -35,15 +34,15 @@ msgid "Visit the &Dual Voice website!"
 msgstr "بازدید از &وبسایت صدای دوگانه!"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
-msgid "&About the Dual Voice for NVDA"
+msgid "&About the Dual voice for NVDA"
 msgstr "&درباره صدای دوگانه برای NVDA"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:32
-msgid "Dual &Voice"
+msgid "Dual &voice"
 msgstr "&صدای دوگانه"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:35
-msgid "About the Dual Voice add-on for NVDA"
+msgid "About the Dual voice add-on for NVDA"
 msgstr "درباره افزونه صدای دوگانه برای NVDA"
 
 #: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:21

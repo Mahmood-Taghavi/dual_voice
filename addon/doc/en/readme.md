@@ -10,8 +10,8 @@ Note 1: You can now use a custom dialog box entitled "Dual voice" in the NVDA me
 
 Note 2: A complimentary free software namely SAPI_Unifier is designed to add support for Windows 10 oneCore voices and Microsoft speech platform (speech server) voices to the Dual Voice for NVDA. So, I suggest using [SAPI_Unifier](https://mahmood-taghavi.github.io/SAPI_Unifier/) to extend the capabilities of the Dual Voice.
 
-Note 3: The latest version of NVDA which supports Windows XP and Windows Vista is NVDA 2017.3 and the latest Dual Voice which is compatible with NVDA 2017.3 is version 3.1.
+Note 3: The latest version of NVDA which supports Windows XP and Windows Vista is NVDA 2017.3 and the latest Dual Voice which is compatible with that NVDA is version 3.1.
 
 This package is distributed under the terms of the GNU General Public License, version 2. Please see the file "COPYING.txt" for further details.
 
-Copyright © 2015-2020 Seyed Mahmood Taghavi-Shahri.
+Copyright © 2015-2021 Seyed Mahmood Taghavi-Shahri.

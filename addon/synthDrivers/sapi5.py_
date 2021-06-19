@@ -1,10 +1,7 @@
 # -*- coding: UTF-8 -*-
-# A part of Dual Voice for NVDA
-# Copyright (C) 2015-2021 Seyed Mahmood Taghavi Shahri
-# https://mahmood-taghavi.github.io/dual_voice/
-# This file is developed based on the NVDA "sapi5.py" driver (obtained on 2021-06-19) (NVDA: "release-2021.1beta3").
-# https://github.com/nvaccess/nvda/blob/master/source/synthDrivers/sapi5.py
-# This file is covered by the GNU General Public License version 3.
+# A part of NonVisual Desktop Access (NVDA)
+# Copyright (C) 2006-2017 NV Access Limited, Peter Vágner, Aleksey Sadovoy
+# This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import locale
@@ -25,9 +22,6 @@ import config
 import nvwave
 from logHandler import log
 import weakref
-from . import _dual_sapi5
-from synthDrivers import _realtime
-
 
 from speech.commands import (
 	IndexCommand,
@@ -155,8 +149,8 @@ class SynthDriver(SynthDriver):
 
 	COM_CLASS = "SAPI.SPVoice"
 
-	name="dual_sapi5"
-	description="Dual voice using Speech API version 5"
+	name="sapi5"
+	description="Microsoft Speech API version 5"
 
 	@classmethod
 	def check(cls):
@@ -177,26 +171,6 @@ class SynthDriver(SynthDriver):
 		ensureWaveOutHooks()
 		self._pitch=50
 		self._initTts(_defaultVoiceToken)
-		confspec = {
-			"sapi5SecondVoice": "string(default='')",
-			"sapi5SecondRate": "integer(default=50)",
-			"sapi5SecondPitch": "integer(default=50)",
-			"sapi5SecondVolume": "integer(default=100)",
-			"sapi5SecondIsLatin": "boolean(default=False)",
-			"sapi5NonLatinPriority": "boolean(default=False)",
-			"sapi5ConsiderContext": "boolean(default=False)",
-		}
-		config.conf.spec["dual_voice"] = confspec
-
-		_realtime.sapi5SecondVoice = config.conf["dual_voice"]["sapi5SecondVoice"]
-		_realtime.sapi5SecondRate = config.conf["dual_voice"]["sapi5SecondRate"]
-		_realtime.sapi5SecondPitch = config.conf["dual_voice"]["sapi5SecondPitch"]
-		_realtime.sapi5SecondVolume = config.conf["dual_voice"]["sapi5SecondVolume"]
-		_realtime.sapi5SecondIsLatin = config.conf["dual_voice"]["sapi5SecondIsLatin"]
-		_realtime.sapi5NonLatinPriority = config.conf["dual_voice"]["sapi5NonLatinPriority"]
-		_realtime.sapi5ConsiderContext = config.conf["dual_voice"]["sapi5ConsiderContext"]
-		_realtime.primaryVoiceID = _defaultVoiceToken
-		_realtime.problemisticPrimaryVoiceID = ''
 
 	def terminate(self):
 		self._eventsConnection = None
@@ -215,18 +189,9 @@ class SynthDriver(SynthDriver):
 					language=locale.windows_locale[int(v[i].getattribute('language').split(';')[0],16)]
 				except KeyError:
 					language=None
-				# Extract the name Attribute of each voice which could be used in SAPI5 XML for voice selection.
-				voiceAttribName = v[i].getattribute('name')
 			except COMError:
 				log.warning("Could not get the voice info. Skipping...")
 			voices[ID]=VoiceInfo(ID,name,language)
-			if voiceAttribName in _realtime.list_VoiceAttribName:
-				pass
-			else:
-				_realtime.list_VoiceAttribName.append(voiceAttribName)
-				_realtime.list_VoiceID.append(ID)
-				_realtime.list_VoiceName.append(name)
-				_realtime.list_VoiceLang.append(language)
 		return voices
 
 	def _getVoiceTokens(self):
@@ -240,8 +205,7 @@ class SynthDriver(SynthDriver):
 		return self._pitch
 
 	def _get_volume(self):
-		# return self.tts.volume
-		return _realtime.sapi5FirstVolume
+		return self.tts.volume
 
 	def _get_voice(self):
 		return self.tts.voice.Id
@@ -264,8 +228,7 @@ class SynthDriver(SynthDriver):
 		self._pitch=value
 
 	def _set_volume(self,value):
-		# self.tts.Volume = value
-		_realtime.sapi5FirstVolume = value
+		self.tts.Volume = value
 
 	def _initTts(self, voice=None):
 		self.tts=comtypes.client.CreateObject(self.COM_CLASS)
@@ -299,8 +262,6 @@ class SynthDriver(SynthDriver):
 			# Voice not found.
 			return
 		self._initTts(voice=voice)
-		_realtime.primaryVoiceID = voice.Id
-		_realtime.problemisticPrimaryVoiceID = ''
 
 	def _percentToPitch(self, percent):
 		return percent // 2 - 25
@@ -329,8 +290,7 @@ class SynthDriver(SynthDriver):
 			out.append(outAfter)
 		return u" ".join(out)
 
-	# def speak(self, speechSequence):
-	def _speak(self, speechSequence):
+	def speak(self, speechSequence):
 		textList = []
 
 		# NVDA SpeechCommands are linear, but XML is hierarchical.
@@ -358,16 +318,12 @@ class SynthDriver(SynthDriver):
 		# Pitch must always be specified in the markup.
 		tags["pitch"] = {"absmiddle": self._percentToPitch(pitch)}
 		rate = self.rate
-		# volume = self.volume
-		volume = _realtime.sapi5FirstVolume
+		volume = self.volume
 
 		for item in speechSequence:
 			if isinstance(item, str):
 				outputTags()
-				# textList.append(item.replace("<", "&lt;"))
-				item = item.replace("<", "&lt;")
-				item = _dual_sapi5.nlp(text=item)
-				textList.append(item)
+				textList.append(item.replace("<", "&lt;"))
 			elif isinstance(item, IndexCommand):
 				textList.append('<Bookmark Mark="%d" />' % item.index)
 			elif isinstance(item, CharacterModeCommand):
@@ -422,38 +378,6 @@ class SynthDriver(SynthDriver):
 		text = "".join(textList)
 		flags = constants.SVSFIsXML | constants.SVSFlagsAsync
 		self.tts.Speak(text, flags)
-
-	def speak(self, speechSequence):
-		try:
-			self._speak(speechSequence)
-		except:
-			if (_realtime.problemisticPrimaryVoiceID == _realtime.primaryVoiceID) and (_realtime.problemisticSapi5SecondVoice == _realtime.sapi5SecondVoice):
-				log.error('Dual Voice add-on: Fatal error! It seems the selected voices and the computer default voice have problems. So at least select another voice as the computer default voice!')
-				speech.setSynth('espeak')
-			else:
-				_realtime.problemisticSapi5SecondVoice = _realtime.sapi5SecondVoice
-				_realtime.problemisticPrimaryVoiceID = _realtime.primaryVoiceID
-				try:
-					# Possible solution 1: find the primary voice and use it also as the secondary voice.
-					index = _realtime.list_VoiceID.index(_realtime.primaryVoiceID)
-					voiceAttribName = _realtime.list_VoiceAttribName[index]
-					log.warning('Dual Voice add-on: Error in at least one of the selected SAPI 5 voices has been occured! The primary voice was ('+voiceAttribName+') and the secondary voice was ('+_realtime.sapi5SecondVoice+')')
-					log.warning('Dual Voice add-on: Try possible solution 1! Use the primary voice ('+voiceAttribName+') in place of the possible problematic secondary voice ('+_realtime.sapi5SecondVoice+').')
-					_realtime.tempStringVar = _realtime.sapi5SecondVoice
-					_realtime.sapi5SecondVoice = voiceAttribName
-					#config.conf["dual_voice"]["sapi5SecondVoice"] = _realtime.sapi5SecondVoice
-					self._speak(speechSequence)
-				except:
-					# Possible solution 2: find the default voice and use it as the primary voice.
-					_realtime.sapi5SecondVoice = _realtime.tempStringVar
-					#config.conf["dual_voice"]["sapi5SecondVoice"] = _realtime.sapi5SecondVoice
-					log.warning('Dual Voice add-on: The possible solution 1 was failed! Hence the selected secondary voice was restored.')
-					log.warning('Dual Voice add-on: Try possible solution 2! Use the computer default voice ('+_realtime.list_VoiceAttribName[0]+') in place of the possible problematic primary voice ('+voiceAttribName+').')
-					tokens = self._getVoiceTokens()
-					voice = tokens[0]
-					self._initTts(voice=voice)
-					_realtime.primaryVoiceID = voice.Id
-					self._speak(speechSequence)
 
 	def cancel(self):
 		# SAPI5's default means of stopping speech can sometimes lag at end of speech, especially with Win8 / Win 10 Microsoft Voices.

@@ -5,16 +5,20 @@
 # This file is covered by the GNU General Public License version 3.
 # See the file COPYING for more details.
 
+from logHandler import log
+
 def charactertype(character):
     character.encode('utf-8')
     code = ord(character)
-    if (code ==32):
+    if (code ==8217 or code == 8250 or code == 8211 ):
+        charType = 'symbol'     # common punctuation or number
+    elif (code ==32 or code == 8203):
         charType = 'space'
     elif (code >= 880):
         charType = 'nonLatin'
     elif (code ==33 or code ==34) or (code >= 39 and code <= 41) or (code >= 44 and code <= 46) or (code ==58 or code ==59) or (code ==63 or code ==96 or code ==171 or code ==187 or code ==8230):
         charType = 'complex'
-    elif (code < 65) or (code > 90 and code < 97) or (code > 122 and code < 161) or (code > 161 and code < 191) or (code ==215 or code ==247):
+    elif (code < 65) or (code > 90 and code < 97) or (code > 122 and code < 161) or (code > 161 and code < 191) or (code ==215 or code ==247 or code == 2019 ):
         charType = 'symbol'     # common punctuation or number
     else:
         charType = 'Latin'

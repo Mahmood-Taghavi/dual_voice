@@ -1,0 +1,107 @@
+# Russian translations for the Dual Voice for NVDA package.
+# Copyright (C) 2020 THE Dual Voice for NVDA'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Dual Voice for NVDA package.
+# <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Dual Voice for NVDA\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-30 20:03+0430\n"
+"PO-Revision-Date: 2024-01-03 11:29+0300\n"
+"Last-Translator: Danil Kostenkov <danilkostenkov38@gmail.com>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:20
+msgid "You can type here to check the voices"
+msgstr "Вы можете написать что-нибудь здесь, чтобы проверить голоса"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:24
+msgid "&Settings of the Dual voice..."
+msgstr "&Настройки Dual voice..."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:26
+msgid "Visit the SAPI &Unifier website!"
+msgstr "&Посетить веб-сайт SAPI Unifier!"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:28
+msgid "Visit the &Dual Voice website!"
+msgstr "&Посетить web-сайт Dual Voice!"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:30
+msgid "&About the Dual voice for NVDA"
+msgstr "&О Dual voice для NVDA"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:32
+msgid "Dual &voice"
+msgstr "Dual &voice"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\__init__.py:35
+msgid "About the Dual voice add-on for NVDA"
+msgstr "О Dual voice для NVDA"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:21
+msgid "The Dual Voice settings"
+msgstr "Настройки Dual voice"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:26
+#, python-format
+msgid ""
+"Your current speech synthesizer is the %s. Please select the Dual Voice as "
+"the speech synthesizer in the NVDA speech settings."
+msgstr ""
+"Ваш текущий речевой синтезатор %s. Пожалуйста, выберите Dual Voice в "
+"качестве синтезатора речи в настройках речи NVDA."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:38
+#, python-format
+msgid "You have selected %s as the primary voice."
+msgstr "У вас выбран %s в качестве основного голоса."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:45
+msgid "Secondary &voice:"
+msgstr "Дополнительный голос:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:64
+msgid "&Use the secondary voice for reading Latin text instead of non-Latin."
+msgstr ""
+"&Использовать дополнительный голос для чтения латинского текста вместо "
+"нелатинского."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:70
+msgid "&Rate:"
+msgstr "&Скорость:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:78
+msgid "&Pitch:"
+msgstr "&Высота:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:86
+msgid "V&olume:"
+msgstr "&Громкость:"
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:94
+msgid "&Prioritize non-Latin text over Latin text."
+msgstr "Приоритет нелатинского текста над латинским текстом."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:99
+msgid "Read &numbers and punctuations based on surrounding text."
+msgstr "Читать цифры и знаки препинания на основе окружающего текста."
+
+#: D:\~Work\github\dual_voice\addon\globalPlugins\dual_voice_globalPlugin\dialogs.py:105
+msgid "&Typing area:"
+msgstr "&Область ввода:"
+
+#: D:\~Work\github\dual_voice\buildVars.py:17
+msgid "Dual Voice for NVDA"
+msgstr "Dual Voice для NVDA"
+
+#: D:\~Work\github\dual_voice\buildVars.py:20
+msgid "Read non-Latin and Latin texts using two separate voices."
+msgstr "Читать нелатинские и латинские тексты двумя отдельными голосами."

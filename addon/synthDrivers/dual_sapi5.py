@@ -47,62 +47,6 @@ SPAS_STOP=1
 SPAS_PAUSE=2
 SPAS_RUN=3
 
-class FunctionHooker(object):
-
-	def __init__(
-		self,
-		targetDll: str,
-		importDll: str,
-		funcName: str,
-		newFunction # result of ctypes.WINFUNCTYPE
-	):
-		# dllImportTableHooks_hookSingle expects byte strings.
-		try:
-			self._hook=NVDAHelper.localLib.dllImportTableHooks_hookSingle(
-				targetDll.encode("mbcs"),
-				importDll.encode("mbcs"),
-				funcName.encode("mbcs"),
-				newFunction
-			)
-		except UnicodeEncodeError:
-			log.error("Error encoding FunctionHooker input parameters", exc_info=True)
-			self._hook = None
-		if self._hook:
-			log.debug(f"Hooked {funcName}")
-		else:
-			log.error(f"Could not hook {funcName}")
-			raise RuntimeError(f"Could not hook {funcName}")
-
-	def __del__(self):
-		if self._hook:
-			NVDAHelper.localLib.dllImportTableHooks_unhookSingle(self._hook)
-
-_duckersByHandle={}
-
-@WINFUNCTYPE(windll.winmm.waveOutOpen.restype,*windll.winmm.waveOutOpen.argtypes,use_errno=False,use_last_error=False)
-def waveOutOpen(pWaveOutHandle,deviceID,wfx,callback,callbackInstance,flags):
-	try:
-		res=windll.winmm.waveOutOpen(pWaveOutHandle,deviceID,wfx,callback,callbackInstance,flags) or 0
-	except WindowsError as e:
-		res=e.winerror
-	if res==0 and pWaveOutHandle:
-		h=pWaveOutHandle.contents.value
-		d=audioDucking.AudioDucker()
-		d.enable()
-		_duckersByHandle[h]=d
-	return res
-
-@WINFUNCTYPE(c_long,c_long)
-def waveOutClose(waveOutHandle):
-	try:
-		res=windll.winmm.waveOutClose(waveOutHandle) or 0
-	except WindowsError as e:
-		res=e.winerror
-	if res==0 and waveOutHandle:
-		_duckersByHandle.pop(waveOutHandle,None)
-	return res
-
-_waveOutHooks=[]
 def ensureWaveOutHooks():
 	if not _waveOutHooks and audioDucking.isAudioDuckingSupported():
 		sapiPath=os.path.join(os.path.expandvars("$SYSTEMROOT"),"system32","speech","common","sapi.dll")
@@ -174,7 +118,6 @@ class SynthDriver(SynthDriver):
 		@param _defaultVoiceToken: an optional sapi voice token which should be used as the default voice (only useful for subclasses)
 		@type _defaultVoiceToken: ISpeechObjectToken
 		"""
-		ensureWaveOutHooks()
 		self._pitch=50
 		self._initTts(_defaultVoiceToken)
 		confspec = {
@@ -275,9 +218,6 @@ class SynthDriver(SynthDriver):
 			# Therefore, set the voice before setting the audio output.
 			# Otherwise, we will get poor speech quality in some cases.
 			self.tts.voice = voice
-		outputDeviceID=nvwave.outputDeviceNameToID(config.conf["speech"]["outputDevice"], True)
-		if outputDeviceID>=0:
-			self.tts.audioOutput=self.tts.getAudioOutputs()[outputDeviceID]
 		self._eventsConnection = comtypes.client.GetEvents(self.tts, SapiSink(weakref.ref(self)))
 		self.tts.EventInterests = constants.SVEBookmark | constants.SVEEndInputStream
 		from comInterfaces.SpeechLib import ISpAudio
